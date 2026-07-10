@@ -10,55 +10,54 @@
 
 <body>
 
-    <!-- Navbar -->
-    <nav>
-        <h2>AI Code Review Assistant</h2>
+   <nav>
+    <h2>AI Code Review Assistant</h2>
 
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Features</a></li>
-            <li><a href="#">Contact</a></li>
-        </ul>
-    </nav>
+    <ul>
+        <li><a href="#">Dashboard</a></li>
+        <li><a href="#">New Review</a></li>
+        <li><a href="#">History</a></li>
+        <li><a href="#">Profile</a></li>
+    </ul>
+</nav>
 
-    <!-- Hero Section -->
-    <section class="hero">
+<section class="review-container">
 
-        <h1>AI Code Review Assistant</h1>
+    <h1>New AI Code Review</h1>
 
-        <p>
-            Review your code instantly with Artificial Intelligence and improve your coding skills.
-        </p>
+    <label>Programming Language</label>
 
-        <button>Start Review</button>
+    <select>
+        <option>JavaScript</option>
+        <option>Python</option>
+        <option>C++</option>
+        <option>Java</option>
+        <option>C</option>
+    </select>
 
-    </section>
+    <label>Paste Your Code</label>
 
-    <!-- About -->
-    <section class="about">
+    <textarea placeholder="Paste your code here..."></textarea>
 
-        <h2>About Project</h2>
+    <button class="review-btn"onclick="reviewCode()">
+        Review Code
+    </button>
 
-        <p>
-            This project helps developers review their code using Artificial Intelligence. It detects bugs, provides suggestions, and improves code quality.
-        </p>
+</section>
 
-    </section>
+<section class="result-container">
 
-    <!-- Features -->
-    <section class="features">
+    <h2>AI Review Result</h2>
 
-        <h2>Features</h2>
+    <div class="result-card" id="result">
 
-        <ul class="feature-list">
-            <li>✅ AI Code Review</li>
-            <li>✅ Bug Detection</li>
-            <li>✅ Code Suggestions</li>
-            <li>✅ Beginner Friendly</li>
-        </ul>
+        Your AI feedback will appear here.
 
-    </section>
+    </div>
+
+</section>
+
+<script src="script.js"></script>
 
 </body>
 </html>
