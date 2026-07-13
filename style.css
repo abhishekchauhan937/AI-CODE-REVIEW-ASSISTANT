@@ -195,3 +195,37 @@ textarea{
     background:none;
     padding-left:20px;
 }
+
+.result-card{
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    animation: fadeIn 0.5s ease;
+}
+
+.result-card h3{
+    color: green;
+}
+
+.result-card ul{
+    margin-top: 10px;
+    padding-left: 20px;
+}
+
+.result-card li{
+    margin: 8px 0;
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
