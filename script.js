@@ -2,124 +2,165 @@ function reviewCode() {
 
     // Get user input
     let code = document.querySelector("textarea").value;
+    let characters = code.length;
+    let lines = code.split("/n").length;
     let language = document.querySelector("select").value;
     let result = document.getElementById("result");
     let button = document.getElementById("reviewBtn");
 
-    // Check if textarea is empty
+    // Check empty code
     if (code.trim() === "") {
         alert("Please paste your code first!");
         return;
     }
 
-    // Change button
+    // Button loading
     button.innerHTML = "Reviewing...";
     button.disabled = true;
 
-    // Show loading message
+    // Loading card
     result.innerHTML = `
-        <div class="result-card">
-            <h2>🤖 AI is reviewing your code...</h2>
-            <p>Please wait...</p>
-        </div>
+    <div class="result-card">
+        <h2>🤖 AI is reviewing your code...</h2>
+        <p>Please wait...</p>
+    </div>
     `;
 
-    // Wait for 2 seconds
+    // Delay
     setTimeout(() => {
-
+        
+        let reviewTime = new Date().toLocaleString();
         let bugs = 0;
         let suggestions = [];
+        let rating = "⭐⭐⭐⭐⭐ Excellent";
 
-        // Check console.log
+        // console.log
         if (code.includes("console.log")) {
             suggestions.push("Remove console.log() before production.");
         }
 
-        // Check var
+        // var
         if (code.includes("var ")) {
             bugs++;
             suggestions.push("Use let or const instead of var.");
         }
 
-        // Check ==
+        // ==
         if (code.includes("==")) {
             bugs++;
             suggestions.push("Use === instead of ==.");
         }
 
-        // Check comments
-        if (!code.includes("//") && !code.includes("/*")) {
-            suggestions.push("Add comments to improve readability.");
+        // eval
+        if (code.includes("eval(")) {
+            bugs++;
+            suggestions.push("Avoid using eval().");
         }
 
-        // Check function length
-        if (code.length > 300) {
+        // Long code
+        if (code.length > 400) {
             suggestions.push("Split your code into smaller functions.");
         }
 
+        // Missing comments
+        if (!code.includes("//")) {
+            suggestions.push("Add comments to improve readability.");
+        }
+
         // Rating
-        let rating = "⭐⭐⭐⭐⭐ Excellent";
-
-        if (bugs == 1) {
+        if (bugs == 0) {
+            rating = "⭐⭐⭐⭐⭐ Excellent";
+        } else if (bugs == 1) {
             rating = "⭐⭐⭐⭐ Good";
-        }
-
-        if (bugs == 2) {
+        } else if (bugs == 2) {
             rating = "⭐⭐⭐ Average";
-        }
-
-        if (bugs >= 3) {
+        } else {
             rating = "⭐⭐ Needs Improvement";
         }
 
-        // Perfect code
-        if (suggestions.length === 0) {
-            suggestions.push("Excellent! No suggestions. 🎉");
+        // Default suggestion
+        if (suggestions.length == 0) {
+            suggestions.push("Excellent! No suggestions.");
         }
 
-        // Display result
+        // Score
+        let score = 100 - (bugs * 20);
+
+        if (score < 0) {
+            score = 0;
+        }
+
+        // Result
         result.innerHTML = `
-            <div class="result-card">
+        <div class="result-card">
 
-                <h2>✅ AI Review Completed</h2>
+            <h3>🤖 AI Review Completed</h3>
 
-                <p><strong>Language:</strong> ${language}</p>
+            <div class="score-box">
 
-                <p><strong>Code Quality:</strong> ${rating}</p>
+                <div class="progress">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
 
-                <p><strong>Bugs Found:</strong> ${bugs}</p>
-
-                <p><strong>Suggestions:</strong></p>
-
-                <ul>
-                    ${suggestions.map(item => `<li>${item}</li>`).join("")}
-                </ul>
+                <div class="score-text">
+                    ${score}% Code Quality
+                </div>
 
             </div>
+
+            <p><strong>Language:</strong> ${language}</p>
+
+            <p><strong>Reviewed on:</strong> ${reviewTime}</p>
+
+            <p><strong>Characters:</strong> ${characters}</p>
+
+            <p><strong>Lines of Code:</strong> ${lines}</p>
+
+            <p class="rating"><strong>Rating:</strong>${rating}</p>
+
+            <p><strong>Bugs Found:</strong> ${bugs}</p>
+
+            <p><strong>Status:</strong> ${bugs === 0
+? "<span class='good'>Excellent ✅</span>"
+: "<span class='bad'>Needs Improvement ❌</span>"}
+</p>
+
+            <p><strong>Suggestions:</strong></p>
+
+            <ul>
+                ${suggestions.map(item => `<li>${item}</li>`).join("")}
+            </ul>
+
+        </div>
         `;
 
-        // Change button after review
+        // Progress animation
+        setTimeout(() => {
+            document.getElementById("progressBar").style.width = score + "%";
+        }, 100);
+
+        // Button animation
         button.innerHTML = "Review Complete ✅";
 
-        // Reset button after 2 seconds
         setTimeout(() => {
             button.innerHTML = "Review Code";
             button.disabled = false;
         }, 2000);
 
     }, 2000);
-
 }
 
-    function toggleTheme(){
+
+// Dark Mode
+function toggleTheme() {
 
     document.body.classList.toggle("dark");
 
     let btn = document.getElementById("themeBtn");
 
-    if(document.body.classList.contains("dark")){
+    if (document.body.classList.contains("dark")) {
         btn.innerHTML = "☀️ Light Mode";
-    }else{
+    } else {
         btn.innerHTML = "🌙 Dark Mode";
     }
 

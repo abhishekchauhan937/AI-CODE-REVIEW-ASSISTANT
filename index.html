@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,57 +11,65 @@
 
 <body>
 
-   <nav>
-    <h2>AI Code Review Assistant</h2>
+    <div class="review-container">
 
-    <ul>
-        <li><a href="#">Dashboard</a></li>
-        <li><a href="#">New Review</a></li>
-        <li><a href="#">History</a></li>
-        <li><a href="#">Profile</a></li>
-    </ul>
-</nav>
+        <!-- Dark Mode Button -->
+        <button id="themeBtn" onclick="toggleTheme()">
+            🌙 Dark Mode
+        </button>
 
-<section class="review-container">
+        <!-- Heading -->
+        <h1>🤖 AI Code Review Assistant</h1>
 
-    <button id="themeBtn" onclick="toggleTheme()">
-🌙 Dark Mode
-</button>
+        <p>
+            Paste your code below and let AI analyze it for bugs,
+            code quality, and improvement suggestions.
+        </p>
 
-    <h1>New AI Code Review</h1>
+        <!-- Language Selection -->
+        <label><strong>Select Language</strong></label>
 
-    <label>Programming Language</label>
+        <select>
+            <option>JavaScript</option>
+            <option>Python</option>
+            <option>C</option>
+            <option>C++</option>
+            <option>Java</option>
+            <option>HTML</option>
+            <option>CSS</option>
+        </select>
 
-    <select>
-        <option>JavaScript</option>
-        <option>Python</option>
-        <option>C++</option>
-        <option>Java</option>
-        <option>C</option>
-    </select>
+        <br><br>
 
-    <label>Paste Your Code</label>
+        <!-- Code Editor -->
+        <textarea
+            rows="12"
+            placeholder="Paste your code here..."></textarea>
 
-    <textarea placeholder="Paste your code here..."></textarea>
+        <br><br>
 
-   <button id="reviewBtn" class="review-btn" onclick="reviewCode()">
-    Review Code
-</button>
-</section>
+        <!-- Review Button -->
+        <button id="reviewBtn" class="review-btn" onclick="reviewCode()">
+            Review Code
+        </button>
 
-<section class="result-container">
+        <br><br>
 
-    <h2>AI Review Result</h2>
+        <!-- AI Review Result -->
+        <section class="result-container">
 
-    <div class="result-card" id="result">
+            <h2>AI Review Result</h2>
 
-        Your AI feedback will appear here.
+            <div id="result">
+                <p>Your AI feedback will appear here.</p>
+            </div>
+
+        </section>
 
     </div>
 
-</section>
-
-<script src="script.js"></script>
+    <script src="script.js"></script>
 
 </body>
+
 </html>
