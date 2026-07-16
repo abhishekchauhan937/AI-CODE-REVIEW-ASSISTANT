@@ -43,26 +43,49 @@
 
         <!-- Code Editor -->
         <textarea
-            rows="12"
-            placeholder="Paste your code here..."></textarea>
+        rows="12"
+        placeholder="Paste your code here..."
+        oninput="updateStats()">
+        </textarea>
 
-        <br><br>
+        <div id="codeStats">
+    Characters: <span id="charCount">0</span> |
+    Lines: <span id="lineCount">0</span>
+</div>
 
         <!-- Review Button -->
-        <button id="reviewBtn" class="review-btn" onclick="reviewCode()">
-            Review Code
-        </button>
+        <button id="reviewBtn" onclick="reviewCode()">Review Code</button>
+
+        <button id="clearBtn" onclick="clearEditor()">Clear</button>
+
+        <p class="shortcut-info">
+    💡 Shortcuts:
+    <strong>Ctrl + Enter</strong> = Review Code |
+    <strong>Ctrl + Delete</strong> = Clear Editor</p>
 
         <br><br>
 
         <!-- AI Review Result -->
         <section class="result-container">
 
-            <h2>AI Review Result</h2>
+        <h2>AI Review Result</h2>
+             
+<button id="copyBtn" onclick="copyReview()">
+    📋 Copy Review
+</button>
+
+<button id="downloadBtn" onclick="downloadReview()">
+    💾 Download Report
+</button>
 
             <div id="result">
                 <p>Your AI feedback will appear here.</p>
             </div>
+
+            <div class="history-section">
+    <h2>📜 Review History</h2>
+    <div id="history"></div>
+</div>
 
         </section>
 

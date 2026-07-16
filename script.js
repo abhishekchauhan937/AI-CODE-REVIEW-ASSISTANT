@@ -146,7 +146,7 @@ function reviewCode() {
             button.innerHTML = "Review Code";
             button.disabled = false;
         }, 2000);
-
+        saveHistory(language,rating,bugs);
     }, 2000);
 }
 
@@ -165,3 +165,108 @@ function toggleTheme() {
     }
 
 }
+
+function copyReview(){
+
+    let review = document.getElementById("result").innerText;
+
+    navigator.clipboard.writeText(review);
+
+    alert("✅ Review copied successfully!");
+
+}
+
+function downloadReview(){
+
+    let review = document.getElementById("result").innerText;
+
+    let blob = new Blob([review], { type: "text/plain" });
+
+    let link = document.createElement("a");
+
+    link.href = URL.createObjectURL(blob);
+
+    link.download = "AI_Review_Report.txt";
+
+    link.click();
+
+}
+
+function updateStats(){
+
+    let textarea = document.querySelector("textarea");
+
+    let text = textarea.value;
+
+    document.getElementById("charCount").innerText = text.length;
+
+    document.getElementById("lineCount").innerText = text.split("\n").length;
+
+}
+
+function clearEditor() {
+    document.querySelector("textarea").value = "";
+    document.getElementById("result").innerHTML = "";
+
+    document.getElementById("charCount").innerText = "Characters: 0 | Lines: 0";
+}
+
+// Keyboard Shortcuts
+document.addEventListener("keydown", function (event) {
+
+    // Ctrl + Enter = Review Code
+    if (event.ctrlKey && event.key === "Enter") {
+        event.preventDefault();
+        reviewCode();
+    }
+
+    // Ctrl + Delete = Clear Editor
+    if (event.ctrlKey && event.key === "Delete") {
+        event.preventDefault();
+        clearEditor();
+    }
+});
+
+function saveHistory(language, rating, bugs) {
+
+    let history = JSON.parse(localStorage.getItem("reviewHistory")) || [];
+
+    history.unshift({
+        language,
+        rating,
+        bugs,
+        date: new Date().toLocaleString()
+    });
+
+    if (history.length > 5) {
+        history.pop();
+    }
+
+    localStorage.setItem("reviewHistory", JSON.stringify(history));
+
+    loadHistory();
+}
+
+function loadHistory() {
+
+    let history = JSON.parse(localStorage.getItem("reviewHistory")) || [];
+
+    let historyDiv = document.getElementById("history");
+
+    historyDiv.innerHTML = "";
+
+    history.forEach(item => {
+
+        historyDiv.innerHTML += `
+        <div class="history-card">
+            <strong>${item.language}</strong><br>
+            ⭐ ${item.rating}<br>
+            🐞 Bugs: ${item.bugs}<br>
+            <small>${item.date}</small>
+        </div>
+        `;
+    });
+
+}
+
+loadHistory();
