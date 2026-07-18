@@ -255,18 +255,76 @@ function loadHistory() {
 
     historyDiv.innerHTML = "";
 
-    history.forEach(item => {
+    history.forEach((item,index) => {
 
-        historyDiv.innerHTML += `
+    historyDiv.innerHTML += `
         <div class="history-card">
+
+            <button
+                class="delete-btn"
+                onclick="deleteHistory(${index})">
+                🗑 Delete
+            </button>
+
             <strong>${item.language}</strong><br>
+
             ⭐ ${item.rating}<br>
+
             🐞 Bugs: ${item.bugs}<br>
+
             <small>${item.date}</small>
+
         </div>
-        `;
+    `;
+});
+}
+
+loadHistory();
+
+function deleteHistory(index){
+
+    let history = JSON.parse(localStorage.getItem("reviewHistory")) || [];
+
+    history.splice(index,1);
+
+    localStorage.setItem(
+        "reviewHistory",
+        JSON.stringify(history)
+    );
+
+    loadHistory();
+
+}
+
+function searchHistory() {
+
+    let input = document
+        .getElementById("searchHistory")
+        .value
+        .toLowerCase();
+
+    let cards = document.querySelectorAll(".history-card");
+
+    cards.forEach(card => {
+
+        if(card.innerText.toLowerCase().includes(input)){
+            card.style.display = "block";
+        }else{
+            card.style.display = "none";
+        }
+
     });
 
 }
 
-loadHistory();
+function clearHistory(){
+
+    if(confirm("Are you sure you want to delete all review history?")){
+
+        localStorage.removeItem("reviewHistory");
+
+        loadHistory();
+
+    }
+
+}
