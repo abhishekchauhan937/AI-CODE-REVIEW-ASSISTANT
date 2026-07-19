@@ -417,3 +417,8 @@ function updateStatistics(){
     document.getElementById("favLanguage").innerText=fav;
 
 }
+
+function logout() {
+    localStorage.clear();
+    window.location.href = "login.html";
+}
