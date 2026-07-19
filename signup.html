@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | AI Code Review Assistant</title>
+
+    <link rel="stylesheet" href="signup.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Left Side -->
+
+    <div class="left">
+
+        <div class="logo">
+            <i class="fas fa-code"></i>
+        </div>
+
+        <h1>AI Code Review Assistant</h1>
+
+        <p class="subtitle">
+            AI-powered JavaScript Review Platform
+        </p>
+
+        <ul class="features">
+            <li><i class="fa-solid fa-circle-check"></i> Detect Bugs & Errors</li>
+            <li><i class="fa-solid fa-circle-check"></i> AI-Powered Code Review</li>
+            <li><i class="fa-solid fa-circle-check"></i> Security Analysis</li>
+            <li><i class="fa-solid fa-circle-check"></i> Performance Optimization</li>
+            <li><i class="fa-solid fa-circle-check"></i> Best Practices</li>
+        </ul>
+
+        <p class="footer-text">
+            Trusted by developers to write cleaner, safer and faster JavaScript.
+        </p>
+
+    </div>
+
+    <!-- Right Side -->
+
+    <div class="right">
+
+        <div class="signup-card">
+
+            <h2>Create Account</h2>
+
+            <p class="small">
+                Create your account to start reviewing JavaScript projects.
+            </p>
+
+            <form id="signupForm">
+
+                <div class="input-box">
+                    <label>Full Name</label>
+                    <input
+                        type="text"
+                        id="name"
+                        placeholder="Enter your full name">
+                </div>
+
+                <div class="input-box">
+                    <label>Email Address</label>
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Enter your email">
+                </div>
+
+                <div class="input-box">
+                    <label>Password</label>
+
+                    <div class="password-box">
+                        <input
+                            type="password"
+                            id="password"
+                            placeholder="Create password">
+
+                        <span id="togglePassword">
+                            <i class="fa-solid fa-eye"></i>
+                        </span>
+                    </div>
+
+                </div>
+
+                <div class="input-box">
+                    <label>Confirm Password</label>
+
+                    <div class="password-box">
+                        <input
+                            type="password"
+                            id="confirmPassword"
+                            placeholder="Confirm password">
+
+                        <span id="toggleConfirmPassword">
+                            <i class="fa-solid fa-eye"></i>
+                        </span>
+                    </div>
+
+                </div>
+
+                <button type="submit" id="signupBtn">
+                    Create Account
+                </button>
+
+                <div id="message"></div>
+
+                <p class="login-link">
+                    Already have an account?
+                    <a href="login.html">Sign In</a>
+                </p>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="signup.js"></script>
+
+</body>
+</html>

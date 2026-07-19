@@ -45,7 +45,7 @@
         <textarea
         rows="12"
         placeholder="Paste your code here..."
-        oninput="updateStats()">
+        oninput="updateStatistics()">
         </textarea>
 
         <div id="codeStats">
@@ -65,6 +65,39 @@
 
         <br><br>
 
+        <div class="stats-container">
+    <h2>📊 Review Statistics</h2>
+
+    <div class="stats-grid">
+
+        <div class="stat-card">
+            <h3 id="totalReviews">0</h3>
+            <p>Total Reviews</p>
+        </div>
+
+        <div class="stat-card">
+            <h3 id="totalBugs">0</h3>
+            <p>Total Bugs</p>
+        </div>
+
+        <div class="stat-card">
+            <h3 id="avgQuality">0%</h3>
+            <p>Average Quality</p>
+        </div>
+
+        <div class="stat-card">
+            <h3 id="favLanguage">-</h3>
+            <p>Most Used Language</p>
+        </div>
+
+    </div>
+</div>
+
+        <!-- Logout Button -->
+         <button onclick="logout()" id="logoutBtn">
+    Logout
+</button>
+
         <!-- AI Review Result -->
         <section class="result-container">
 
@@ -78,8 +111,13 @@
     💾 Download Report
 </button>
 
+            <div class="chart-container">
+            <canvas id="qualityChart"></canvas>
+            </div>
+
             <div id="result">
-                <p>Your AI feedback will appear here.</p>
+
+            s<p>Your AI feedback will appear here.</p>
             </div>
 
             <div class="history-section">
@@ -103,6 +141,7 @@
 
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>
 
 </body>

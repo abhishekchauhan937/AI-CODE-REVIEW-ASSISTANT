@@ -1,0 +1,274 @@
+/* ==========================
+   AI Code Review Login Page
+========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#f5f7fb;
+}
+
+.container{
+    width:95%;
+    max-width:1200px;
+    min-height:700px;
+    display:flex;
+    background:#fff;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 15px 40px rgba(0,0,0,.12);
+}
+
+/* Left */
+
+.left{
+    flex:1;
+    padding:70px 60px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    background:#ffffff;
+    animation:leftSlide .8s ease;
+}
+
+.logo{
+    width:80px;
+    height:80px;
+    background:#4f7cff;
+    color:#fff;
+    border-radius:18px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:36px;
+    margin-bottom:25px;
+}
+
+.left h1{
+    font-size:48px;
+    line-height:1.1;
+    color:#2b2d42;
+    margin-bottom:18px;
+}
+
+.subtitle{
+    color:#6b7280;
+    margin-bottom:35px;
+}
+
+.features{
+    list-style:none;
+}
+
+.features li{
+    margin:18px 0;
+    font-size:17px;
+    color:#444;
+}
+
+.features i{
+    color:#22c55e;
+    margin-right:10px;
+}
+
+.footer-text{
+    margin-top:45px;
+    color:#8a8a8a;
+    font-size:14px;
+}
+
+/* Right */
+
+.right{
+    flex:1;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:40px;
+    background:#f8f9ff;
+}
+
+.login-card{
+    width:100%;
+    max-width:430px;
+    background:#fff;
+    padding:45px;
+    border-radius:20px;
+    box-shadow:0 15px 35px rgba(0,0,0,.08);
+    animation:fadeUp .8s;
+}
+
+.login-card h2{
+    text-align:center;
+    color:#333;
+    margin-bottom:10px;
+}
+
+.small{
+    text-align:center;
+    color:#777;
+    margin-bottom:30px;
+    font-size:14px;
+}
+
+.input-box{
+    margin-bottom:20px;
+}
+
+.input-box label{
+    display:block;
+    margin-bottom:8px;
+    color:#444;
+    font-weight:500;
+}
+
+.input-box input{
+    width:100%;
+    padding:14px;
+    border:1px solid #d8d8d8;
+    border-radius:10px;
+    outline:none;
+    transition:.3s;
+}
+
+.input-box input:focus{
+    border-color:#4f7cff;
+    box-shadow:0 0 10px rgba(79,124,255,.2);
+}
+
+.password-box{
+    position:relative;
+}
+
+.password-box span{
+    position:absolute;
+    right:15px;
+    top:50%;
+    transform:translateY(-50%);
+    cursor:pointer;
+    color:#666;
+}
+
+.options{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin:20px 0;
+    font-size:14px;
+}
+
+.options a{
+    text-decoration:none;
+    color:#4f7cff;
+}
+
+.options label{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+button{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:10px;
+    background:#4f7cff;
+    color:#fff;
+    font-size:17px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+button:hover{
+    background:#2d63ff;
+    transform:translateY(-2px);
+}
+
+#message{
+    margin-top:18px;
+    text-align:center;
+    font-size:14px;
+    color:red;
+}
+
+.signup{
+    margin-top:25px;
+    text-align:center;
+    color:#666;
+}
+
+.signup a{
+    color:#4f7cff;
+    text-decoration:none;
+    font-weight:600;
+}
+
+/* Animations */
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@keyframes leftSlide{
+    from{
+        opacity:0;
+        transform:translateX(-40px);
+    }
+    to{
+        opacity:1;
+        transform:translateX(0);
+    }
+}
+
+/* Mobile */
+
+@media(max-width:900px){
+
+.container{
+    flex-direction:column;
+}
+
+.left{
+    text-align:center;
+    padding:40px 30px;
+}
+
+.logo{
+    margin:auto auto 25px;
+}
+
+.left h1{
+    font-size:36px;
+}
+
+.right{
+    padding:25px;
+}
+
+.login-card{
+    padding:30px;
+}
+
+.options{
+    flex-direction:column;
+    gap:12px;
+}
+
+}

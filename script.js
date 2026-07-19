@@ -1,9 +1,13 @@
+if (localStorage.getItem("isLoggedIn") !== "true") {
+    window.location.href = "login.html";
+}
+
 function reviewCode() {
 
     // Get user input
     let code = document.querySelector("textarea").value;
     let characters = code.length;
-    let lines = code.split("/n").length;
+    let lines = code.split("\n").length;
     let language = document.querySelector("select").value;
     let result = document.getElementById("result");
     let button = document.getElementById("reviewBtn");
@@ -134,6 +138,8 @@ function reviewCode() {
         </div>
         `;
 
+        updateChart(score, bugs);
+
         // Progress animation
         setTimeout(() => {
             document.getElementById("progressBar").style.width = score + "%";
@@ -142,11 +148,11 @@ function reviewCode() {
         // Button animation
         button.innerHTML = "Review Complete ✅";
 
-        setTimeout(() => {
+        setTimeout(() => {J
             button.innerHTML = "Review Code";
             button.disabled = false;
         }, 2000);
-        saveHistory(language,rating,bugs);
+        saveHistory(language, rating, bugs, score);
     }, 2000);
 }
 
@@ -192,7 +198,7 @@ function downloadReview(){
 
 }
 
-function updateStats(){
+function updateStatistics(){
 
     let textarea = document.querySelector("textarea");
 
@@ -208,45 +214,43 @@ function clearEditor() {
     document.querySelector("textarea").value = "";
     document.getElementById("result").innerHTML = "";
 
-    document.getElementById("charCount").innerText = "Characters: 0 | Lines: 0";
+    document.getElementById("charCount").innerText = 0;
+    document.getElementById("lineCount").innerText = 0;
 }
 
 // Keyboard Shortcuts
 document.addEventListener("keydown", function (event) {
 
-    // Ctrl + Enter = Review Code
-    if (event.ctrlKey && event.key === "Enter") {
+    // Command + Enter = Review Code
+    if (event.metaKey && event.key === "Enter") {
         event.preventDefault();
         reviewCode();
     }
 
-    // Ctrl + Delete = Clear Editor
-    if (event.ctrlKey && event.key === "Delete") {
+    // Command + Delete = Clear Editor
+    if (event.metaKey && event.key === "Delete") {
         event.preventDefault();
         clearEditor();
     }
 });
 
-function saveHistory(language, rating, bugs) {
+function saveHistory(language, rating, bugs, quality) {
 
     let history = JSON.parse(localStorage.getItem("reviewHistory")) || [];
 
     history.unshift({
-        language,
-        rating,
-        bugs,
+        language: language,
+        rating: rating,
+        bugs: bugs,
+        quality: quality,
         date: new Date().toLocaleString()
     });
-
-    if (history.length > 5) {
-        history.pop();
-    }
 
     localStorage.setItem("reviewHistory", JSON.stringify(history));
 
     loadHistory();
+    updateStatistics();
 }
-
 function loadHistory() {
 
     let history = JSON.parse(localStorage.getItem("reviewHistory")) || [];
@@ -280,6 +284,7 @@ function loadHistory() {
 }
 
 loadHistory();
+updateStatistics();
 
 function deleteHistory(index){
 
@@ -293,6 +298,7 @@ function deleteHistory(index){
     );
 
     loadHistory();
+    updateStatistics();
 
 }
 
@@ -325,6 +331,89 @@ function clearHistory(){
 
         loadHistory();
 
+        updateStatistics();
+
     }
+
+}
+
+let qualityChart;
+
+function updateChart(quality, bugs) {
+
+    const readability = Math.max(40, quality - 10);
+    const performance = Math.max(50, quality - 5);
+
+    const ctx = document.getElementById("qualityChart").getContext("2d");
+
+    if (qualityChart) {
+        qualityChart.destroy();
+    }
+
+    qualityChart = new Chart(ctx, {
+        type: "bar",
+        data: {
+            labels: ["Quality", "Bugs", "Readability", "Performance"],
+            datasets: [{
+                label: "Code Analysis",
+                data: [quality, bugs, readability, performance]
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 100
+                }
+            }
+        }
+    });
+}
+
+function updateStatistics(){
+
+    let history = JSON.parse(localStorage.getItem("reviewHistory")) || [];
+
+    document.getElementById("totalReviews").innerText = history.length;
+
+    let bugs = 0;
+    let quality = 0;
+    let languageCount = {};
+
+    history.forEach(item=>{
+
+        bugs += item.bugs;
+
+        quality += item.quality || 100;
+
+        languageCount[item.language] =
+        (languageCount[item.language] || 0)+1;
+
+    });
+
+    document.getElementById("totalBugs").innerText = bugs;
+
+    document.getElementById("avgQuality").innerText =
+        history.length ?
+        Math.round(quality/history.length)+"%"
+        : "0%";
+
+    let fav="-";
+    let max=0;
+
+    for(let lang in languageCount){
+
+        if(languageCount[lang]>max){
+
+            max=languageCount[lang];
+
+            fav=lang;
+
+        }
+
+    }
+
+    document.getElementById("favLanguage").innerText=fav;
 
 }
